@@ -7,7 +7,7 @@ import sbtrelease.ReleaseStateTransformations._
 
 lazy val commonSettings = Seq(
   ecrId in ThisBuild := "$ecrId$",
-  dockerRepository := Some(s"${ecrId.value}.dkr.ecr.eu-west-2.amazonaws.com"),
+  dockerRepository := Some(s"\${ecrId.value}.dkr.ecr.eu-west-2.amazonaws.com"),
   javaAgents += "io.kamon" % "kanela-agent" % "1.0.1",
   addCompilerPlugin("org.spire-math" %% "kind-projector" % "0.9.9")
 )
@@ -20,17 +20,17 @@ scalacOptions in ThisBuild ++= Seq(
   "-feature",
   "-language:higherKinds")
 
-lazy val $boundedContextId$Model = (project in file(s"$bcPrefix-model"))
+lazy val $boundedContextId$Model = (project in file(s"\$bcPrefix-model"))
   .settings(
-    name := s"$bcPrefix-model",
+    name := s"\$bcPrefix-model",
     libraryDependencies ++=
       Dependencies.Circe ++
         Dependencies.Enumeratum
   )
 
-lazy val $boundedContextId$Sdk = (project in file(s"${bcPrefix}-sdk"))
+lazy val $boundedContextId$Sdk = (project in file(s"\${bcPrefix}-sdk"))
   .settings(
-    name := s"$bcPrefix-sdk",
+    name := s"\$bcPrefix-sdk",
     libraryDependencies ++=
       Dependencies.Api ++
         Dependencies.ApiClient ++
