@@ -20,6 +20,33 @@ scalacOptions in ThisBuild ++= Seq(
   "-feature",
   "-language:higherKinds")
 
+$if(createApi.truthy)$
+lazy val $boundedContextId$Api = (project in file(s"\$bcPrefix-api"))
+  .enablePlugins(JavaAgent, PlatformPlugin)
+  .settings(commonSettings)
+  .settings(
+    name := s"\$bcPrefix-api"
+  )
+  .dependsOn($boundedContextId$Sdk)
+
+lazy val $boundedContextId$ApiExternal = (project in file(s"\$bcPrefix-api-external"))
+  .enablePlugins(JavaAgent, PlatformPlugin)
+  .settings(commonSettings)
+  .settings(
+    name := s"\$bcPrefix-api-external"
+  )
+  .dependsOn($boundedContextId$Sdk)
+
+lazy val $boundedContextId$ApiInternal = (project in file(s"$bcPrefix-api-internal"))
+  .enablePlugins(JavaAgent, PlatformPlugin)
+  .settings(commonSettings)
+  .settings(
+    name := s"\$bcPrefix-api-internal",
+    libraryDependencies ++= Dependencies.Config
+  )
+  .dependsOn($boundedContextId$Sdk)
+$endif$
+
 lazy val $boundedContextId$Model = (project in file(s"\$bcPrefix-model"))
   .settings(
     name := s"\$bcPrefix-model",
