@@ -37,7 +37,7 @@ lazy val $boundedContextId$ApiExternal = (project in file(s"\$bcPrefix-api-exter
   )
   .dependsOn($boundedContextId$Sdk)
 
-lazy val $boundedContextId$ApiInternal = (project in file(s"$bcPrefix-api-internal"))
+lazy val $boundedContextId$ApiInternal = (project in file(s"\$bcPrefix-api-internal"))
   .enablePlugins(JavaAgent, PlatformPlugin)
   .settings(commonSettings)
   .settings(
