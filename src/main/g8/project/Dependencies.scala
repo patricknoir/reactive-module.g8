@@ -1,6 +1,10 @@
 import sbt._
 
 object Dependencies {
+  val MoPlay = Seq(
+    "com.moplay" %% "sdk-http" % Versions.moPlay
+  )
+
   val Circe = Seq(
     "io.circe" %% "circe-core" % Versions.circe,
     "io.circe" %% "circe-generic" % Versions.circe,

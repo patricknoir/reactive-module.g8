@@ -5,6 +5,8 @@ import sbt.Keys.libraryDependencies
 import sbtrelease.ReleasePlugin.autoImport._
 import sbtrelease.ReleaseStateTransformations._
 
+scalaVersion := "2.12.10"
+
 lazy val commonSettings = Seq(
   ecrId in ThisBuild := "$ecrId$",
   dockerRepository := Some(s"\${ecrId.value}.dkr.ecr.eu-west-2.amazonaws.com"),
@@ -12,7 +14,7 @@ lazy val commonSettings = Seq(
   addCompilerPlugin("org.spire-math" %% "kind-projector" % "0.9.9")
 )
 
-lazy val bcPrefix = "$boundedContextId$"
+lazy val bcPrefix = "$bcId$"
 
 scalacOptions in ThisBuild ++= Seq(
   "-Ypartial-unification",
@@ -20,34 +22,35 @@ scalacOptions in ThisBuild ++= Seq(
   "-feature",
   "-language:higherKinds")
 
-$if(createApi.truthy)$
-lazy val $boundedContextId$Api = (project in file(s"\$bcPrefix-api"))
+enablePlugins(PlatformPlugin)
+
+lazy val $bcId$Api = (project in file(s"\$bcPrefix-api"))
   .enablePlugins(JavaAgent, PlatformPlugin)
   .settings(commonSettings)
   .settings(
     name := s"\$bcPrefix-api"
   )
-  .dependsOn($boundedContextId$Sdk)
+  .dependsOn($bcId$Sdk)
 
-lazy val $boundedContextId$ApiExternal = (project in file(s"\$bcPrefix-api-external"))
+lazy val $bcId$ApiExternal = (project in file(s"\$bcPrefix-api-external"))
   .enablePlugins(JavaAgent, PlatformPlugin)
   .settings(commonSettings)
   .settings(
-    name := s"\$bcPrefix-api-external"
+    name := s"\$bcPrefix-api-external",
+    libraryDependencies ++= Dependencies.MoPlay
   )
-  .dependsOn($boundedContextId$Sdk)
+  .dependsOn($bcId$Sdk)
 
-lazy val $boundedContextId$ApiInternal = (project in file(s"\$bcPrefix-api-internal"))
+lazy val $bcId$ApiInternal = (project in file(s"\$bcPrefix-api-internal"))
   .enablePlugins(JavaAgent, PlatformPlugin)
   .settings(commonSettings)
   .settings(
     name := s"\$bcPrefix-api-internal",
-    libraryDependencies ++= Dependencies.Config
+    libraryDependencies ++= Dependencies.MoPlay
   )
-  .dependsOn($boundedContextId$Sdk)
-$endif$
+  .dependsOn($bcId$Sdk)
 
-lazy val $boundedContextId$Model = (project in file(s"\$bcPrefix-model"))
+lazy val $bcId$Model = (project in file(s"\$bcPrefix-model"))
   .settings(
     name := s"\$bcPrefix-model",
     libraryDependencies ++=
@@ -55,7 +58,7 @@ lazy val $boundedContextId$Model = (project in file(s"\$bcPrefix-model"))
         Dependencies.Enumeratum
   )
 
-lazy val $boundedContextId$Sdk = (project in file(s"\${bcPrefix}-sdk"))
+lazy val $bcId$Sdk = (project in file(s"\${bcPrefix}-sdk"))
   .settings(
     name := s"\$bcPrefix-sdk",
     libraryDependencies ++=
@@ -67,5 +70,5 @@ lazy val $boundedContextId$Sdk = (project in file(s"\${bcPrefix}-sdk"))
         Dependencies.HttpClient ++
         Dependencies.Logging
   )
-  .dependsOn($boundedContextId$Model)
+  .dependsOn($bcId$Model)
 
