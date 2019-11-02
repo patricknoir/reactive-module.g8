@@ -70,7 +70,7 @@ Assuming we'll be deploying into *int5* environment (just need to change target 
 
 Generate login command in ecr
 ```bash
-$(aws ecr get-login --no-include-email --profile <aws_profile: e.g:default> --region eu-west-2)
+\$(aws ecr get-login --no-include-email --profile <aws_profile: e.g:default> --region eu-west-2)
 ```
 
 ```bash
