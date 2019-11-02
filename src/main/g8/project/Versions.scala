@@ -1,4 +1,5 @@
 object Versions {
+  val moPlay = "3.0.11"
   val akka = "2.5.23"
   val akkaHttp = "10.1.8"
   val akkaHttpCirce = "1.27.0"
