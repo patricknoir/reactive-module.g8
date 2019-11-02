@@ -1,4 +1,4 @@
-package $organization$.$boundedContextId$.api.internal
+package $organization$.$bcId$.api.internal
 
 import akka.actor.ActorSystem
 import com.moplay.platform.akka.AkkaHttpApp
@@ -7,11 +7,11 @@ import tapir._
 
 object Main extends AkkaHttp {
 	
-	implicit override val system = ActorSystem("$boundedContextId$ApiInternal")
+	implicit override val system = ActorSystem("$bcId$ApiInternal")
 
-	private val baseEndpoint: Endpoint[Unit, RESTError, Unit, Nothing] =
+	private val baseEndpoint: Endpoint[Unit, String, Unit, Nothing] =
     endpoint
       .in("api" / "v1.0")
-      .errorOut(jsonBody[RESTError])
+      .errorOut(jsonBody[String])
 
 }
