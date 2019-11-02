@@ -2,7 +2,7 @@ package $organization;format="package"$.$bcName$.api.external
 
 import akka.actor.ActorSystem
 import com.moplay.http.akkahttp.AkkaHttpApp
-import $organization;format=package$.$bcName$.api.external.endpoints.ExternalEndpointsV1
+import $organization;format="package"$.$bcName$.api.external.endpoints.ExternalEndpointsV1
 import com.softwaremill.sttp.{ SttpBackend, SttpBackendOptions }
 import com.softwaremill.sttp.akkahttp.AkkaHttpBackend
 import tapir.server.akkahttp._
