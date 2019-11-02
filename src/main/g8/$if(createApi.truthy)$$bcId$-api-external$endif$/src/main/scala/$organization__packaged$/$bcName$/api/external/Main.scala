@@ -1,4 +1,4 @@
-package $organization;format=package$.$bcName$.api.external
+package $organization;format="package"$.$bcName$.api.external
 
 import akka.actor.ActorSystem
 import com.moplay.http.akkahttp.AkkaHttpApp

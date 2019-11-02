@@ -1,4 +1,4 @@
-package $organization;format=package$.$bcName$.api.external.endpoints
+package $organization;format="package"$.$bcName$.api.external.endpoints
 
 import tapir._
 import tapir.json.circe._
